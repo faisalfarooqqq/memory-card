@@ -1,7 +1,7 @@
 const Card = ({ pokemon, onCardClick }) => {
   return (
     <div
-      className="border border-gray-300 rounded-md p-2 flex flex-col items-center cursor-pointer"
+      className="border border-gray-300 rounded-md p-4 flex flex-col items-center cursor-pointer hover:shadow-1g hover:border-orange-300 transform hover:scale-105 transition duration-300"
       onClick={() => onCardClick(pokemon.id)}
     >
       <img

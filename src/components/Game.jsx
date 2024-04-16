@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CardList from './CardList';
 
 const Game = () => {
@@ -6,6 +6,7 @@ const Game = () => {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
+  const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
     fetchPokemon();
@@ -40,6 +41,7 @@ const Game = () => {
   };
 
   const handleCardClick = (id) => {
+    setGameStarted(true);
     if (!clickedCards.includes(id)) {
      
       const shuffledPokemonList = [...pokemonList].sort(() => Math.random() - 0.5);
@@ -59,12 +61,16 @@ const Game = () => {
     }
     setScore(0);
     setClickedCards([]);
+    setGameStarted(false);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-semibold mb-4">Score: {score}</h2>
       <h2 className="text-2xl font-semibold mb-4">Best Score: {bestScore}</h2>
+      {!gameStarted && (
+        <div className="text-lg font-semibold mb-4">Pick a card to  start the game. REMEMBER! Not to click the same card twice.</div>
+      )}
       <CardList pokemonList={pokemonList} onCardClick={handleCardClick} />
     </div>
   );
